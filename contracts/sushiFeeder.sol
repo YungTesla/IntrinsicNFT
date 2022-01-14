@@ -13,10 +13,10 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
  * @dev Providing liquidity to a sushiswap liquidity pool
  */
 contract SushiFeeder is ERC721URIStorage {  
-    address tokenAaddress;
-    address tokenBaddress;
-    address [] path;
-    address addressSLP;
+    address tokenAaddress = 0x15f878888b534b18A3C0a465845774a4CF259cE9;
+    address tokenBaddress= 0x4252017A3262B40e9567250133B542BAD79Fd523;
+    address[] path = [tokenAaddress, tokenBaddress];    
+    address addressSLP =0x7ddDC915A2EE011F72cc72581992c301346F617c;
 
     address sushiRouterAddress = 0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506;
     address sushiAddress = 0x9dBC5fbc89572E9525E8e65B15C24137A57a8f60;
@@ -34,21 +34,6 @@ contract SushiFeeder is ERC721URIStorage {
     event NewNFTMinted(address sender, uint256 tokenId);
 
     constructor() ERC721("SushiFeeder", "FEED") {
-        //lp info
-        new_lp(
-            0x15f878888b534b18A3C0a465845774a4CF259cE9,
-            0x4252017A3262B40e9567250133B542BAD79Fd523,
-            0x7ddDC915A2EE011F72cc72581992c301346F617c
-            );
-    }
-
-    function new_lp(address addressTokenA, address addressTokenB, address addressLP) public {
-        // add function removeLP()
-        
-        tokenAaddress = addressTokenA;
-        tokenBaddress = addressTokenB; 
-        path = [tokenAaddress, tokenBaddress];
-        addressSLP = addressLP;
     }
 
     function buyNFT(uint amount) public {

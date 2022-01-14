@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.11+commit.d7f03943"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -261,29 +261,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addressTokenA",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "addressTokenB",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "addressLP",
-						"type": "address"
-					}
-				],
-				"name": "new_lp",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -710,11 +687,11 @@
 			]
 		},
 		"contracts/sushiFeeder.sol": {
-			"keccak256": "0x128c95f851aa2a4dd5df46d0ac9124f7261e611af7d1fc6697dc439119b4e069",
+			"keccak256": "0x6c1cf3c3aa8abd8b0f9b5fe469ee87b3807649a25b314847bbe7d81d057b9379",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://38c4858488ae1aa9d658e6068d5b74b303bba3eb4ca94ec7fc70b964a0bb23d1",
-				"dweb:/ipfs/Qmc5JWQS2Qx3htZTLNGeX2FwnLfMQEhiREuR9WHkpt2ZuK"
+				"bzz-raw://6871f677891ca47ab13132f9ec36c6c80fd10d91bcd586cb04bd3876ae602a96",
+				"dweb:/ipfs/QmNatP8aNPfYc4hMvV1WrW1p2hGp6vyxoUcU99LTG4JTT4"
 			]
 		}
 	},
