@@ -6,48 +6,11 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddressSLP",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"inputs": [],
-				"name": "addressSLP",
+				"name": "sushiSwapRouter",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "addressTokenA",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "addressTokenB",
-				"outputs": [
-					{
-						"internalType": "address",
+						"internalType": "contract IUniswapV2Router01",
 						"name": "",
 						"type": "address"
 					}
@@ -59,11 +22,21 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "newAddressSLP",
+						"name": "_tokenA",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_tokenB",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
 					}
 				],
-				"name": "changePoolInfo",
+				"name": "swap",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -82,7 +55,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"tests/sushifeeder/changePoolInfo.sol": "Testing"
+			"tests/sushifeeder/removePool.sol": "Testing"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -104,14 +77,6 @@
 				"dweb:/ipfs/QmbefZ5RoEZKNHXCALfh683PnaNYzKPcKMFjyY1DVAgq8A"
 			]
 		},
-		"contracts/interfaces/IUniswapV2Pair.sol": {
-			"keccak256": "0x08f9a63b34855eec941be8d36a04424f1a1725a2c030373fcef3afeb480ca385",
-			"license": "GPL-3.0",
-			"urls": [
-				"bzz-raw://174219f9a6c90b4d0133475da5333403aea21ba49d303f3ba28cb4e9a2a0141e",
-				"dweb:/ipfs/QmdDy25xsAfWxaKnRbGJys7d9BaPhpbGorMQCY4Au2auZL"
-			]
-		},
 		"contracts/interfaces/IUniswapV2Router01.sol": {
 			"keccak256": "0x12091adc186fe351c639dc62aa0b691f78c7bea054c27bbb4b58acd02e1b2ce7",
 			"license": "GPL-3.0",
@@ -120,12 +85,12 @@
 				"dweb:/ipfs/QmejsqRXse45aoyDjccfKEnZ1uZzdqUtjsYbAS3ThAMesu"
 			]
 		},
-		"tests/sushifeeder/changePoolInfo.sol": {
-			"keccak256": "0xabb69967dff5801f385225b9863b96f0fcfbfff5ce487332a300e112ad8d5d2e",
+		"tests/sushifeeder/removePool.sol": {
+			"keccak256": "0x3ffe1c8d76070b49b0118922315adaed84bc9bdd3d27369c491fc0b3dca60ccc",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ae9fdd644e1b1838b4ed3fe18323cb5424597fcc77bdc39c562a3ecdbd9a16cf",
-				"dweb:/ipfs/QmQxMxHA7GQa4MUkerZ4d64UWFDUx7pokrw48ELPQmyaeN"
+				"bzz-raw://38f795b12b30eba10c84aed3d20587841fee841527152d557632b1b076962324",
+				"dweb:/ipfs/QmXsDdJj5YTqjkbMASa4bNkCeg4QY44HXw8QqLwKV9dNGc"
 			]
 		}
 	},
