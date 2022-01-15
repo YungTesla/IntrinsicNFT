@@ -125,6 +125,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "addressSLP",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -162,13 +175,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
 				"name": "buyAndAddLiquidity",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -177,12 +184,19 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "newAddressSLP",
+						"type": "address"
 					}
 				],
-				"name": "buyNFT",
+				"name": "changePoolInfo",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createNFT",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -239,19 +253,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "lp",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
@@ -287,6 +288,19 @@
 				"name": "payingOutRewards",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "priceNewNFT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -359,6 +373,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "startPriceNFT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes4",
@@ -418,32 +445,6 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "tokenA",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "tokenB",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -678,6 +679,14 @@
 				"dweb:/ipfs/QmfYuZxRfx2J2xdk4EXN7jKg4bUYEMTaYk9BAw9Bqn4o2Y"
 			]
 		},
+		"contracts/interfaces/IUniswapV2Pair.sol": {
+			"keccak256": "0x08f9a63b34855eec941be8d36a04424f1a1725a2c030373fcef3afeb480ca385",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://174219f9a6c90b4d0133475da5333403aea21ba49d303f3ba28cb4e9a2a0141e",
+				"dweb:/ipfs/QmdDy25xsAfWxaKnRbGJys7d9BaPhpbGorMQCY4Au2auZL"
+			]
+		},
 		"contracts/interfaces/IUniswapV2Router01.sol": {
 			"keccak256": "0x12091adc186fe351c639dc62aa0b691f78c7bea054c27bbb4b58acd02e1b2ce7",
 			"license": "GPL-3.0",
@@ -687,11 +696,11 @@
 			]
 		},
 		"contracts/sushiFeeder.sol": {
-			"keccak256": "0x6c1cf3c3aa8abd8b0f9b5fe469ee87b3807649a25b314847bbe7d81d057b9379",
+			"keccak256": "0x86f3a1fe0cce9bbaac276c4f31ecd11bef4532a31c35083ef5b251f5fb701a8f",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://6871f677891ca47ab13132f9ec36c6c80fd10d91bcd586cb04bd3876ae602a96",
-				"dweb:/ipfs/QmNatP8aNPfYc4hMvV1WrW1p2hGp6vyxoUcU99LTG4JTT4"
+				"bzz-raw://d876079e5bd56b7a6c4fd773ed0544412b77eef2251b671f3ad641fd22670e2b",
+				"dweb:/ipfs/QmRbBMFJpL8yao4D38iah51crgCqyuEicjoEdnNk4HSKFd"
 			]
 		}
 	},
