@@ -77,26 +77,27 @@ contract SushiFeeder is ERC721URIStorage {
         IUniswapV2Pair newSushiPair = IUniswapV2Pair(newAddressSLP);
         address newTokenA = newSushiPair.token0();
         
-        swap(tokenA, newTokenA, tokenA.balanceOf(address(this)));
-        swap(tokenB, newTokenA, tokenB.balanceOf(address(this)));
+        swap(address(tokenA), newTokenA, tokenA.balanceOf(address(this)));
+        swap(address(tokenB), newTokenA, tokenB.balanceOf(address(this)));
 
         // change pool info
         changePoolInfo(newSushiPair);
         
         //swap half of tokenA for tokenB
         uint amount = SafeMath.div(tokenA.balanceOf(address(this)),2);
-        swap(tokenA, address(tokenB), amount);
+        swap(address(tokenA), address(tokenB), amount);
 
         addLiquidity();
         // farmstaking
     }
 
-    function swap(IERC20 _tokenA, address _tokenB, uint _amount) public {
+    function swap(address _tokenA, address _tokenB, uint _amount) public {
+        IERC20 token = IERC20(_tokenA);
         address[] memory path = new address[](2);
-        path[0] = address(_tokenA);
+        path[0] = _tokenA;
         path[1] = _tokenB;
 
-        _tokenA.approve(sushiRouterAddress, _amount);
+        token.approve(sushiRouterAddress, _amount);
 
         uint256 deadline = block.timestamp;
         sushiSwapRouter.swapExactTokensForTokens(_amount,0,path,address(this),deadline); 

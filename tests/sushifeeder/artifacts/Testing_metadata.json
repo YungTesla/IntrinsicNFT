@@ -40,6 +40,13 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "swapping",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -86,11 +93,11 @@
 			]
 		},
 		"tests/sushifeeder/removePool.sol": {
-			"keccak256": "0x3ffe1c8d76070b49b0118922315adaed84bc9bdd3d27369c491fc0b3dca60ccc",
+			"keccak256": "0x013d8febea3b5afabb9a066ac28885c7bb6a7ff0ec45e73d1ba6954315e86152",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://38f795b12b30eba10c84aed3d20587841fee841527152d557632b1b076962324",
-				"dweb:/ipfs/QmXsDdJj5YTqjkbMASa4bNkCeg4QY44HXw8QqLwKV9dNGc"
+				"bzz-raw://e09048e8aed7110eca9ae57fb578564a7f070b6e26d4bc5f4d94742e22d7c008",
+				"dweb:/ipfs/QmQ8ftJkFFXd9ZaeQgkHN3NKbhKAb3jbVwR1BE4qAe7vvr"
 			]
 		}
 	},

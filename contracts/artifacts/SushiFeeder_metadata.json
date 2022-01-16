@@ -453,7 +453,7 @@
 			{
 				"inputs": [
 					{
-						"internalType": "contract IERC20",
+						"internalType": "address",
 						"name": "_tokenA",
 						"type": "address"
 					},
@@ -739,11 +739,11 @@
 			]
 		},
 		"contracts/sushiFeeder.sol": {
-			"keccak256": "0x9ce8b808d4be8be83c8d8f39da64052729bade02b989661ffa65f9f266f912ce",
+			"keccak256": "0x5d6183bf645d9a70846d70cc1b78493be5a05f8cce8e7ce1270c9a6b3ddcc57d",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://3069507ce672f7e607dea8b282c377535efd4e33504faf613bbbd9a96af1f131",
-				"dweb:/ipfs/QmaANBZJhHg7912V81BQGXcYWqyVZQkmCCSZgf6ZJgwBmg"
+				"bzz-raw://0960c09469287e33fec1d383b47c5f9a504e56091c7067c6f76d592deacc9321",
+				"dweb:/ipfs/Qme1tGnrJKhg8ZDKKCP1zUhcx1GqYZdBTiuVZ2JnyRJocC"
 			]
 		}
 	},

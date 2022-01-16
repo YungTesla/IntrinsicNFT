@@ -22,7 +22,10 @@ contract Testing {
             sushiSwapRouter.swapExactTokensForTokens(_amount,0,path,address(this),deadline); 
     }
 
-    function swapping(address _tokenA, address _tokenB, uint _amount) public {
-        swap(
+    function swapping() public {
+        address tokenA = 0x15f878888b534b18A3C0a465845774a4CF259cE9;
+        address tokenB = 0x4252017A3262B40e9567250133B542BAD79Fd523;
+        uint amount = 5e17;
+        swap(tokenA, tokenB, amount);
     }
 }
