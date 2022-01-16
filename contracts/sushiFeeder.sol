@@ -22,30 +22,30 @@ contract SushiFeeder is ERC721URIStorage {
 
     // sushi swap router for swapping and adding liquidity
     address sushiRouterAddress = 0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506;
-    IUniswapV2Router01 public sushiSwapRouter = IUniswapV2Router01(sushiRouterAddress);  
+    IUniswapV2Router01 sushiSwapRouter = IUniswapV2Router01(sushiRouterAddress);  
     
     // farm rewards
     address sushiAddress = 0x9dBC5fbc89572E9525E8e65B15C24137A57a8f60;
-    IERC20 public sushi = IERC20(sushiAddress);
+    IERC20 sushi = IERC20(sushiAddress);
 
     // NFT collection
     ERC721 myNFTs = ERC721(address(this));
 
     // counter for NFT minting
     using Counters for Counters.Counter;
-    Counters.Counter public _tokenIds;
+    Counters.Counter  _tokenIds;
 
     // events
     event NewNFTMinted(address sender, uint256 tokenId);
 
     constructor() ERC721("SushiFeeder", "FEED") {
-        addressSLP = 0x7ddDC915A2EE011F72cc72581992c301346F617c;
+        addressSLP = 0x5b93d73B75fa586FAdd65e5023Af4A884693B973;
         IUniswapV2Pair sushiPair = IUniswapV2Pair(addressSLP);
         changePoolInfo(sushiPair);
     }
 
     // change pool info
-    function changePoolInfo(IUniswapV2Pair sushiPair) public {
+    function changePoolInfo(IUniswapV2Pair sushiPair) private {
         addressSLP = address(sushiPair);
         lp = IERC20(addressSLP); 
 
@@ -57,7 +57,7 @@ contract SushiFeeder is ERC721URIStorage {
     }
 
     // remove Pool
-    function removeLiquidity() public {
+    function removeLiquidity() private {
     // approve router to transfer lp tokens
         uint amountLP = lp.balanceOf(address(this));
         lp.approve(address(sushiSwapRouter),amountLP);
@@ -91,7 +91,7 @@ contract SushiFeeder is ERC721URIStorage {
         // farmstaking
     }
 
-    function swap(address _tokenA, address _tokenB, uint _amount) public {
+    function swap(address _tokenA, address _tokenB, uint _amount) private {
         IERC20 token = IERC20(_tokenA);
         address[] memory path = new address[](2);
         path[0] = _tokenA;
@@ -107,7 +107,7 @@ contract SushiFeeder is ERC721URIStorage {
     uint public startPriceNFT = 1e17;
     uint public priceNewNFT = startPriceNFT;
 
-    function createNFT() public {
+    function createNFT() private {
         tokenA.transferFrom(msg.sender, address(this), priceNewNFT);
         priceNewNFT = SafeMath.add(priceNewNFT, startPriceNFT);
 
@@ -130,7 +130,7 @@ contract SushiFeeder is ERC721URIStorage {
         // depositSLP();
     }
 
-    function swapTokens() public {
+    function swapTokens() private {
         uint amount = tokenA.balanceOf(address(this));
         uint swapAmount = SafeMath.div(amount, 2);
         uint minSwapAmount = SafeMath.mul(swapAmount, SafeMath.div(95, 100));
@@ -145,7 +145,7 @@ contract SushiFeeder is ERC721URIStorage {
         sushiSwapRouter.swapExactTokensForTokens(swapAmount,minSwapAmount,path,address(this),deadline); 
     }
 
-    function addLiquidity() public {
+    function addLiquidity() private {
         uint amountADesired = tokenA.balanceOf(address(this));
         uint amountBDesired = tokenB.balanceOf(address(this));
 
@@ -158,7 +158,7 @@ contract SushiFeeder is ERC721URIStorage {
         sushiSwapRouter.addLiquidity(address(tokenA),address(tokenB),amountADesired,amountBDesired,amountAMin,amountBMin,address(this),deadline);
     }
 
-    function depositSLP() public {
+    function depositSLP() private {
         uint amount = lp.balanceOf(address(this));
         lp.approve(msg.sender, amount);
         lp.transfer(msg.sender, amount);

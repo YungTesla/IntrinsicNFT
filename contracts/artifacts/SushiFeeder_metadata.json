@@ -106,26 +106,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "_tokenIds",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "_value",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "addLiquidity",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "addressSLP",
 				"outputs": [
 					{
@@ -190,33 +170,6 @@
 					}
 				],
 				"name": "changePool",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "contract IUniswapV2Pair",
-						"name": "sushiPair",
-						"type": "address"
-					}
-				],
-				"name": "changePoolInfo",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "createNFT",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "depositSLP",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -314,13 +267,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "removeLiquidity",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -422,62 +368,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "sushi",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "sushiSwapRouter",
-				"outputs": [
-					{
-						"internalType": "contract IUniswapV2Router01",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_tokenA",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_tokenB",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "swap",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "swapTokens",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -739,11 +629,11 @@
 			]
 		},
 		"contracts/sushiFeeder.sol": {
-			"keccak256": "0x5d6183bf645d9a70846d70cc1b78493be5a05f8cce8e7ce1270c9a6b3ddcc57d",
+			"keccak256": "0xddc1c944ddee475e449b76556cbeb92b94d56cbf472e7ea4aca6d22bb2454db6",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://0960c09469287e33fec1d383b47c5f9a504e56091c7067c6f76d592deacc9321",
-				"dweb:/ipfs/Qme1tGnrJKhg8ZDKKCP1zUhcx1GqYZdBTiuVZ2JnyRJocC"
+				"bzz-raw://6e98a4fa012066a8cbe44c20645180d5b8ff28b4af07968410b9c1953a283e74",
+				"dweb:/ipfs/Qmf13eWWHZxLDiiVZo963QjswV4sWohZ8m6KoTvSVyGpxN"
 			]
 		}
 	},
