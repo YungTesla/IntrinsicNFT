@@ -156,7 +156,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "buyAndAddLiquidity",
+				"name": "buyNewNFT",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -231,6 +231,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "newPriceNFT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -254,19 +267,6 @@
 				"name": "payingOutRewards",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "priceNewNFT",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -629,11 +629,11 @@
 			]
 		},
 		"contracts/sushiFeeder.sol": {
-			"keccak256": "0xddc1c944ddee475e449b76556cbeb92b94d56cbf472e7ea4aca6d22bb2454db6",
+			"keccak256": "0x4ce8522d8ac5a0096eadf808898bdf5167ca95368eacbc3dacab1a543816dd9e",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://6e98a4fa012066a8cbe44c20645180d5b8ff28b4af07968410b9c1953a283e74",
-				"dweb:/ipfs/Qmf13eWWHZxLDiiVZo963QjswV4sWohZ8m6KoTvSVyGpxN"
+				"bzz-raw://744f33144e89270687e30dd96f50cab271a5f95a554f96800e2685dd9859d33e",
+				"dweb:/ipfs/QmQcB8xWt2ArYhbChf9XD6TZpaxiQRu3mWSifXM5beq6rb"
 			]
 		}
 	},
