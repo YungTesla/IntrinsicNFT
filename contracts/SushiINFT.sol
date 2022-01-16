@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
  * @title Sushi Feeder
  * @dev Providing liquidity to a sushiswap liquidity pool
  */
-contract SushiFeeder is ERC721URIStorage { 
+contract SushiINFT is ERC721URIStorage { 
     // NFT starting price and current price
     uint public startPriceNFT = 1e17;
     uint public newPriceNFT = startPriceNFT;
@@ -43,10 +43,11 @@ contract SushiFeeder is ERC721URIStorage {
     // events
     event NewNFTMinted(address sender, uint256 tokenId);
 
-    constructor() ERC721("SushiFeeder", "FEED") {
+    constructor(address[] memory _pools) ERC721("Intrisic NFT X Sushiswap Collection", "INFT") {
         addressSLP = 0x5b93d73B75fa586FAdd65e5023Af4A884693B973;
         IUniswapV2Pair sushiPair = IUniswapV2Pair(addressSLP);
         changePoolInfo(sushiPair);
+        updatePoolVote(_pools);
     }
 
     // change pool info
@@ -74,7 +75,19 @@ contract SushiFeeder is ERC721URIStorage {
         sushiRouter.removeLiquidity(address(tokenA), address(tokenB), amountLP, amountAMin, amountBMin, address(this), deadline);
     }
 
-    function changePool(address newAddressSLP) public {
+    uint LastPoolUpdate = block.timestamp;
+    uint blocktimeMonth = 1300000;
+
+    function changePool(address[] memory _pools) public {
+        // uint newUpdateBlock = SafeMath.add(LastPoolUpdate, blocktimeMonth);
+        // require(block.timestamp > newUpdateBlock, "Timeslot of a month");
+        address newAddressSLP = winnerPoolVote();
+        updatePoolVote(_pools);
+
+        _changePool(newAddressSLP);
+    }
+
+    function _changePool(address newAddressSLP) public {
         // remove liquidity
         removeLiquidity();
 
@@ -94,6 +107,9 @@ contract SushiFeeder is ERC721URIStorage {
 
         addLiquidity();
         // farmstaking
+
+        // set last update date
+        LastPoolUpdate = block.timestamp;
     }
 
     function swap(address _tokenA, address _tokenB, uint _amount) private {
@@ -118,6 +134,8 @@ contract SushiFeeder is ERC721URIStorage {
         _setTokenURI(newItemId, "https://jsonkeeper.com/b/6AZA");
 
         _tokenIds.increment();
+
+        voters[msg.sender].weight += 1;
 
         emit NewNFTMinted(msg.sender, newItemId);
     }
@@ -167,6 +185,7 @@ contract SushiFeeder is ERC721URIStorage {
 
     //split rewards 1st of the month evenly
     function payingOutRewards() public {
+        // add require timer min amount of blocks cince last payout
         uint balance = sushi.balanceOf(address(this));
         uint amountNFTs = totalSupply();
         uint payoutAmount = SafeMath.div(balance, amountNFTs);
@@ -175,4 +194,81 @@ contract SushiFeeder is ERC721URIStorage {
             sushi.transfer(myNFTs.ownerOf(i), payoutAmount);
         }
     }
+
+    //voting for change of pool
+    struct Proposal {
+        address pair;   
+        uint voteCount; // number of accumulated votes
+    }
+
+    struct Voter {
+        uint weight; // weight is accumulated by delegation
+        bool voted;  // if true, that person already voted
+    }
+
+    Proposal[] public poolVotes;
+    mapping(address => Voter) public voters;
+
+    function updatePoolVote(address[] memory _pools) public {
+        delete poolVotes;
+
+        for (uint i=0; i < _pools.length; i++){
+            address pair = _pools[i];
+            
+            poolVotes.push(Proposal({
+                pair: pair,
+                voteCount: 0
+            }));
+        }
+
+        uint amountNFTs = totalSupply();
+        for (uint i=0; i < amountNFTs;i++){
+            address voter = myNFTs.ownerOf(i);
+            voters[voter].weight += 1;
+        }
+    }
+
+    function vote(address _pair) public {
+        Voter storage sender = voters[msg.sender];
+        require(sender.weight != 0, "Has no right to vote");
+        require(!sender.voted, "Already voted.");
+        sender.voted = true;
+
+        for(uint i=0; i<poolVotes.length ;i++){
+            if(poolVotes[i].pair == _pair){
+                poolVotes[i].voteCount += sender.weight;
+            }
+        }
+    }
+
+    function winningProposal() public view
+            returns (uint winningProposal_)
+    {
+        uint winningVoteCount = 0;
+        for (uint p = 0; p < poolVotes.length; p++) {
+            if (poolVotes[p].voteCount > winningVoteCount) {
+                winningVoteCount = poolVotes[p].voteCount;
+                winningProposal_ = p;
+            }
+        }
+    }
+
+    function winnerPoolVote() public view
+            returns (address winnerPool_)
+    {
+        winnerPool_ = poolVotes[winningProposal()].pair;
+    }
+
+    //voting for bridging to ethereum (ETH2.0)
+    // function BridgingToEthereum(){
+    //     require(ethereumBrigdeVote.bridging);
+    //     require(owner);
+    //     newContractAdress = ethereumBrigdeVote.newContractAdress;
+        
+    //     removeLiquidity();
+    //     bridgeswap(to ether, newContractAdress);
+
+    //     burn all NFTs
+    // }
+
 }
