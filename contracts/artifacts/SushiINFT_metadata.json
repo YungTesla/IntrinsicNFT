@@ -6,13 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "_pools",
-						"type": "address[]"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -111,19 +105,6 @@
 				"type": "event"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newAddressSLP",
-						"type": "address"
-					}
-				],
-				"name": "_changePool",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "addressSLP",
 				"outputs": [
@@ -181,16 +162,29 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "_pools",
-						"type": "address[]"
-					}
-				],
+				"inputs": [],
 				"name": "changePool",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "pair",
+						"type": "address"
+					}
+				],
+				"name": "checkNewPair",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -282,6 +276,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "pairstore",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "payingOutRewards",
 				"outputs": [],
@@ -291,21 +304,16 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"name": "poolVotes",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "pair",
-						"type": "address"
-					},
-					{
 						"internalType": "uint256",
-						"name": "voteCount",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -484,21 +492,8 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "_pools",
-						"type": "address[]"
-					}
-				],
-				"name": "updatePoolVote",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
-						"name": "_pair",
+						"name": "pair",
 						"type": "address"
 					}
 				],
@@ -732,11 +727,19 @@
 			]
 		},
 		"contracts/SushiINFT.sol": {
-			"keccak256": "0xe78f1e3b3ece05249bfc320785aa94950e50ff2d2c16778a62d41bfb6f488a47",
+			"keccak256": "0x8516138d02df33e796d14aa9207afccb55261eb35ef5474e8dd229e21c17d859",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f29750ae9c0b5051eba62777508eaf3357602866ff7dcaec4a8d47f436207198",
-				"dweb:/ipfs/QmXL56y5paaNQA59Y615UZkdPoG1Q1Vvb1BBiteiPTExL6"
+				"bzz-raw://1c30b02db74fb8ed9650578a29bd0b6067575ecf81109d71cee436b681555bd9",
+				"dweb:/ipfs/QmSipho6jdzZrxHQdugGvHmgsbm5b9jFZBkotNJZEmy15T"
+			]
+		},
+		"contracts/interfaces/IUniswapV2Factory.sol": {
+			"keccak256": "0x359cb57d6f7b80474a1092d96117e676673fb48d563a4d78d01e7f703a86b3c0",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://49e1ad37d45ce7ebffe211ed94bd72e6bfc28f644c7b48aa7439f484b72461dc",
+				"dweb:/ipfs/QmeBvZvFayXK9F67Ejw9vPMax1TC2Sx9fiaBcPAjbwGbjt"
 			]
 		},
 		"contracts/interfaces/IUniswapV2Pair.sol": {

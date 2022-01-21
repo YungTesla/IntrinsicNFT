@@ -2,12 +2,14 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IUniswapV2Router01.sol";
 import "./interfaces/IUniswapV2Pair.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "./interfaces/IUniswapV2Factory.sol";
+
 
 /** 
  * @title Sushi Feeder
@@ -34,7 +36,7 @@ contract SushiINFT is ERC721URIStorage {
     IERC20 sushi = IERC20(0x9dBC5fbc89572E9525E8e65B15C24137A57a8f60);
 
     // NFT collection
-    ERC721 myNFTs = ERC721(address(this));
+    ERC721 inft = ERC721(address(this));
 
     // counter for NFT minting
     using Counters for Counters.Counter;
@@ -43,11 +45,11 @@ contract SushiINFT is ERC721URIStorage {
     // events
     event NewNFTMinted(address sender, uint256 tokenId);
 
-    constructor(address[] memory _pools) ERC721("Intrisic NFT X Sushiswap Collection", "INFT") {
+    constructor() ERC721("Intrisic NFT X Sushiswap Collection", "iNFT") {
         addressSLP = 0x5b93d73B75fa586FAdd65e5023Af4A884693B973;
         IUniswapV2Pair sushiPair = IUniswapV2Pair(addressSLP);
         changePoolInfo(sushiPair);
-        updatePoolVote(_pools);
+        // updatePoolVote(_pools);
     }
 
     // change pool info
@@ -78,16 +80,15 @@ contract SushiINFT is ERC721URIStorage {
     uint LastPoolUpdate = block.timestamp;
     uint blocktimeMonth = 1300000;
 
-    function changePool(address[] memory _pools) public {
+    function changePool() public {
+        // time element
         // uint newUpdateBlock = SafeMath.add(LastPoolUpdate, blocktimeMonth);
         // require(block.timestamp > newUpdateBlock, "Timeslot of a month");
+
+        // new voted pool
         address newAddressSLP = winnerPoolVote();
-        updatePoolVote(_pools);
+        resetPoolVotes();
 
-        _changePool(newAddressSLP);
-    }
-
-    function _changePool(address newAddressSLP) public {
         // remove liquidity
         removeLiquidity();
 
@@ -187,67 +188,74 @@ contract SushiINFT is ERC721URIStorage {
     function payingOutRewards() public {
         // add require timer min amount of blocks cince last payout
         uint balance = sushi.balanceOf(address(this));
-        uint amountNFTs = totalSupply();
-        uint payoutAmount = SafeMath.div(balance, amountNFTs);
+        uint nfts = totalSupply();
+        uint payoutAmount = SafeMath.div(balance, nfts);
 
-        for (uint i=0; i<amountNFTs;i++){
-            sushi.transfer(myNFTs.ownerOf(i), payoutAmount);
+        for (uint i=0; i<nfts;i++){
+            sushi.transfer(inft.ownerOf(i), payoutAmount);
         }
     }
 
-    //voting for change of pool
-    struct Proposal {
-        address pair;   
-        uint voteCount; // number of accumulated votes
-    }
-
+    // voting for liquidity pool
     struct Voter {
         uint weight; // weight is accumulated by delegation
         bool voted;  // if true, that person already voted
     }
 
-    Proposal[] public poolVotes;
+    address[] public pairstore;
+
+    mapping(address => uint) public poolVotes;
     mapping(address => Voter) public voters;
 
-    function updatePoolVote(address[] memory _pools) public {
-        delete poolVotes;
-
-        for (uint i=0; i < _pools.length; i++){
-            address pair = _pools[i];
-            
-            poolVotes.push(Proposal({
-                pair: pair,
-                voteCount: 0
-            }));
+    function resetPoolVotes() private {
+        for (uint i=0; i<pairstore.length;i++){
+            address pair = pairstore[i];
+            poolVotes[pair] = 0;
         }
+        delete pairstore;
 
-        uint amountNFTs = totalSupply();
-        for (uint i=0; i < amountNFTs;i++){
-            address voter = myNFTs.ownerOf(i);
+        uint nfts = totalSupply();
+        for (uint i=0; i < nfts;i++){
+            address voter = inft.ownerOf(i);
+            voters[voter].weight = 0;
+            voters[voter].voted = false;
+        }
+        for (uint i=0; i < nfts;i++){
+            address voter = inft.ownerOf(i);
             voters[voter].weight += 1;
         }
     }
 
-    function vote(address _pair) public {
+    function checkNewPair(address pair) public view returns(bool) {
+        IUniswapV2Pair newPair = IUniswapV2Pair(pair);
+        address token0 = newPair.token0();
+        address token1 = newPair.token1();
+        address factory = 0xc35DADB65012eC5796536bD9864eD8773aBc74C4;
+        address sushiPair = IUniswapV2Factory(factory).getPair(token0, token1);
+        
+        return (sushiPair == pair);
+    }
+
+    function vote(address pair) public {
         Voter storage sender = voters[msg.sender];
-        require(sender.weight != 0, "Has no right to vote");
-        require(!sender.voted, "Already voted.");
+        require(sender.weight != 0, "Has no (more) votes");
         sender.voted = true;
 
-        for(uint i=0; i<poolVotes.length ;i++){
-            if(poolVotes[i].pair == _pair){
-                poolVotes[i].voteCount += sender.weight;
-            }
+        if (poolVotes[msg.sender] == 0 && checkNewPair(pair)) {
+            pairstore.push(pair);
         }
+
+        poolVotes[pair] += sender.weight;
     }
 
     function winningProposal() public view
             returns (uint winningProposal_)
     {
         uint winningVoteCount = 0;
-        for (uint p = 0; p < poolVotes.length; p++) {
-            if (poolVotes[p].voteCount > winningVoteCount) {
-                winningVoteCount = poolVotes[p].voteCount;
+        for (uint p = 0; p < pairstore.length; p++) {
+            uint votes = poolVotes[pairstore[p]];
+            if (votes > winningVoteCount) {
+                winningVoteCount = votes;
                 winningProposal_ = p;
             }
         }
@@ -256,7 +264,7 @@ contract SushiINFT is ERC721URIStorage {
     function winnerPoolVote() public view
             returns (address winnerPool_)
     {
-        winnerPool_ = poolVotes[winningProposal()].pair;
+        winnerPool_ = pairstore[winningProposal()];
     }
 
     //voting for bridging to ethereum (ETH2.0)
