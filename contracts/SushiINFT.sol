@@ -19,7 +19,7 @@ contract SushiINFT is ERC721URIStorage {
     // NFT starting price and current price
     uint public startPriceNFT = 1e17;
     uint public newPriceNFT = startPriceNFT;
-
+    
     // pool info
     address public addressSLP;
     IERC20 lp;

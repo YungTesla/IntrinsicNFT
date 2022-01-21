@@ -727,11 +727,11 @@
 			]
 		},
 		"contracts/SushiINFT.sol": {
-			"keccak256": "0x8516138d02df33e796d14aa9207afccb55261eb35ef5474e8dd229e21c17d859",
+			"keccak256": "0x9566b2e8b278e0dc7cba186a41e6922760641a6055f44feef6587f7bffea8448",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://1c30b02db74fb8ed9650578a29bd0b6067575ecf81109d71cee436b681555bd9",
-				"dweb:/ipfs/QmSipho6jdzZrxHQdugGvHmgsbm5b9jFZBkotNJZEmy15T"
+				"bzz-raw://e65aea64a139f77de176ac716c5aeb92825c4c674c6b710d4e1b34a8aee63eac",
+				"dweb:/ipfs/QmTUs78qBfcntbQMG22gJDr62gMdbvTMEFvtVSGrgc71hY"
 			]
 		},
 		"contracts/interfaces/IUniswapV2Factory.sol": {
